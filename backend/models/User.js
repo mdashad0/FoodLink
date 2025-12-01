@@ -1,10 +1,13 @@
 // const mongoose = require("mongoose");
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import { config } from "dotenv"
+config();
+const db = process.env.MONGO_URI;
 
 
 // ✅ Connect to MongoDB (you can change DB name if needed)
-mongoose.connect("mongodb://127.0.0.1:27017/FoodLink", {
+mongoose.connect(db, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
