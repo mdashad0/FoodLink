@@ -350,7 +350,7 @@ const MyListings = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const res = await axios.get("https://foodlink-0jeg.onrender.com/request-food", {
+        const res = await axios.get("https://foodlink-0jeg.onrender.com/my-listings", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
