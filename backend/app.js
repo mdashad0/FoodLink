@@ -107,7 +107,11 @@ import router from "./routes/index.js";
 
 const app = express();
 
-app.use(cors()); // ✅ Allow requests from frontend
+app.use(cors({
+  origin:["https://food-link-five.vercel.app","http://localhost:5173/"],
+  methods:["GET","POST","DELETE","PUT","PATCH"],
+  credentials:true,
+})); // ✅ Allow requests from frontend
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
