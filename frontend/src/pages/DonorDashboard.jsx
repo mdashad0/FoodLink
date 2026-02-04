@@ -16,13 +16,13 @@ const DonorDashboard = () => {
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          "http://localhost:5000/donor/data",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  "https://foodlink-0jeg.onrender.com/donor/data",
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }
+);
 
         setStats(res.data);
       } catch (error) {
