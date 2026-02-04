@@ -10,7 +10,7 @@ const ReceiverDashboard = () => {
     approvedRequests: 0
   });
 
-  
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +36,9 @@ const ReceiverDashboard = () => {
 
     fetchData();
   }, []);
+  if (loading) {
+    return <p className="p-6 text-xl">Loading Dashboard...</p>;
+  }
 
   
 
