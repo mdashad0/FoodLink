@@ -16,11 +16,33 @@ router.get("/receiver/data", authenticateToken, (req, res) => {
   }
   res.json({ message: "Receiver data loaded" });
 });
-router.get("/donor/data", authenticateToken, (req, res) => {
-  if (req.user.role !== "donor") {
-    return res.status(403).json({ message: "Access denied" });
+router.get("/donor/data", authenticateToken, async (req, res) => {
+  try {
+    if (req.user.role !== "donor") {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    const donorId = req.user.id;
+
+    
+    
+
+    const totalListings = await Food.countDocuments({ donor: donorId });
+    const requestsReceived = await Request.countDocuments({ donor: donorId });
+    const successfulDonations = await Food.countDocuments({
+      donor: donorId,
+      status: "donated",
+    });
+
+    res.json({
+      totalListings,
+      requestsReceived,
+      successfulDonations,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
-  res.json({ message: "Donor data loaded" });
 });
 
 router.post("/register", async (req, res) => {
