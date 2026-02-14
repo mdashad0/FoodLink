@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -7,170 +8,219 @@ const Contact = () => {
     message: "",
   });
 
+  const [focused, setFocused] = useState("");
+  const [success, setSuccess] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thank you! Your message has been submitted.");
-    setFormData({ name: "", email: "", message: "" });
-  };
 
-  const styles = {
-    container: {
-      width: "100vw",
-      minHeight: "90vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundImage:
-        "url('https://img.freepik.com/free-photo/arrangement-compost-made-rotten-food-with-copy-space_23-2149073761.jpg?semt=ais_hybrid&w=740&q=80')",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      padding: "100px 20px",
-      boxSizing: "border-box",
-      position: "relative",
-    },
-    overlay: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgba(0,0,0,0.6)", // dark overlay for readability
-      zIndex: 1,
-    },
-    card: {
-      position: "relative",
-      zIndex: 2, // above overlay
-      background: "rgba(255,255,255,0.95)",
-      padding: "40px 30px",
-      borderRadius: "20px",
-      maxWidth: "450px",
-      width: "100%",
-      boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
-      textAlign: "center",
-    },
-    heading: {
-      fontSize: "2.2rem",
-      fontWeight: "800",
-      marginBottom: "25px",
-      color: "#2d3436",
-      textShadow: "1px 1px 5px rgba(0,0,0,0.1)",
-    },
-    formGroup: {
-      position: "relative",
-      marginBottom: "20px",
-    },
-    input: {
-      width: "100%",
-      padding: "12px 15px",
-      borderRadius: "10px",
-      border: "1px solid #ccc",
-      fontSize: "0.95rem",
-      outline: "none",
-      boxSizing: "border-box",
-      transition: "all 0.3s ease",
-    },
-    textarea: {
-      width: "100%",
-      padding: "12px 15px",
-      borderRadius: "10px",
-      border: "1px solid #ccc",
-      fontSize: "0.95rem",
-      outline: "none",
-      boxSizing: "border-box",
-      resize: "vertical",
-      minHeight: "100px",
-      transition: "all 0.3s ease",
-    },
-    label: {
-      position: "absolute",
-      top: "-8px",
-      left: "12px",
-      background: "#fff",
-      padding: "0 4px",
-      fontSize: "0.85rem",
-      color: "#636e72",
-      fontWeight: "500",
-    },
-    button: {
-      background: "linear-gradient(135deg, #22c55e, #16a34a)",
-      color: "#fff",
-      padding: "12px 35px",
-      borderRadius: "10px",
-      border: "none",
-      fontSize: "1rem",
-      fontWeight: "600",
-      cursor: "pointer",
-      transition: "all 0.3s ease",
-      boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
-    },
+    setSuccess(true);
+
+    setTimeout(() => {
+      setSuccess(false);
+      setFormData({ name: "", email: "", message: "" });
+    }, 2500);
   };
 
   return (
-    <section style={styles.container}>
-      <div style={styles.overlay}></div> {/* dark overlay */}
-      <div style={styles.card}>
-        <h2 style={styles.heading}>Contact Us</h2>
+    <div
+      style={{
+        position: "fixed", // 🔥 perfectly centered always
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        overflow: "hidden",
+        background:
+          "linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c1c)",
+        backgroundSize: "400% 400%",
+        animation: "gradientMove 15s ease infinite",
+      }}
+    >
+      <style>
+        {`
+        @keyframes gradientMove {
+          0% {background-position: 0% 50%;}
+          50% {background-position: 100% 50%;}
+          100% {background-position: 0% 50%;}
+        }
+      `}
+      </style>
+
+      {/* Floating Particles */}
+      {Array.from({ length: 15 }).map((_, i) => (
+        <motion.span
+          key={i}
+          initial={{ y: "100vh", opacity: 0 }}
+          animate={{ y: "-10vh", opacity: [0, 0.6, 0] }}
+          transition={{
+            duration: 8 + Math.random() * 6,
+            repeat: Infinity,
+            delay: Math.random() * 5,
+          }}
+          style={{
+            position: "absolute",
+            width: "5px",
+            height: "5px",
+            borderRadius: "50%",
+            background: "#22c55e",
+            left: `${Math.random() * 100}%`,
+          }}
+        />
+      ))}
+
+      {/* 3D Tilt Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        whileHover={{
+          rotateX: 6,
+          rotateY: -6,
+        }}
+        style={{
+          width: "100%",
+          maxWidth: "480px",
+          padding: "50px 35px",
+          borderRadius: "25px",
+          backdropFilter: "blur(20px)",
+          background: "rgba(255,255,255,0.08)",
+          border: "1px solid rgba(255,255,255,0.2)",
+          boxShadow: "0 30px 70px rgba(0,0,0,0.5)",
+          transformStyle: "preserve-3d",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "2.3rem",
+            fontWeight: "800",
+            textAlign: "center",
+            marginBottom: "35px",
+            color: "#22c55e",
+          }}
+        >
+          Get In Touch
+        </h2>
+
         <form onSubmit={handleSubmit}>
-          <div style={styles.formGroup}>
-            <label style={styles.label}>Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              style={styles.input}
-              required
-            />
-          </div>
-          <div style={styles.formGroup}>
-            <label style={styles.label}>Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              style={styles.input}
-              required
-            />
-          </div>
-          <div style={styles.formGroup}>
-            <label style={styles.label}>Message</label>
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              style={styles.textarea}
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            style={styles.button}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "scale(1.05)";
-              e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.3)";
+          {["name", "email", "message"].map((field) => (
+            <div key={field} style={{ marginBottom: "25px" }}>
+              {field !== "message" ? (
+                <input
+                  type={field === "email" ? "email" : "text"}
+                  name={field}
+                  placeholder={field}
+                  value={formData[field]}
+                  onFocus={() => setFocused(field)}
+                  onBlur={() => setFocused("")}
+                  onChange={handleChange}
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "15px",
+                    borderRadius: "14px",
+                    border:
+                      focused === field
+                        ? "2px solid #22c55e"
+                        : "1px solid #ccc",
+                    outline: "none",
+                    transition: "0.3s",
+                  }}
+                />
+              ) : (
+                <textarea
+                  name={field}
+                  placeholder={field}
+                  value={formData[field]}
+                  onFocus={() => setFocused(field)}
+                  onBlur={() => setFocused("")}
+                  onChange={handleChange}
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "15px",
+                    borderRadius: "14px",
+                    border:
+                      focused === field
+                        ? "2px solid #22c55e"
+                        : "1px solid #ccc",
+                    outline: "none",
+                    resize: "none",
+                    minHeight: "120px",
+                  }}
+                />
+              )}
+            </div>
+          ))}
+
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 20px 40px rgba(34,197,94,0.6)",
             }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.2)";
+            whileTap={{ scale: 0.95 }}
+            type="submit"
+            style={{
+              width: "100%",
+              padding: "15px",
+              borderRadius: "16px",
+              border: "none",
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              cursor: "pointer",
+              background:
+                "linear-gradient(135deg, #22c55e, #16a34a)",
+              color: "#fff",
             }}
           >
-            Send Message
-          </button>
+            🚀 Send Message
+          </motion.button>
         </form>
-      </div>
-    </section>
+      </motion.div>
+
+      {/* 🎉 SUCCESS ANIMATION OVERLAY */}
+      <AnimatePresence>
+        {success && (
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              position: "absolute",
+              width: "200px",
+              height: "200px",
+              borderRadius: "50%",
+              background: "#22c55e",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              boxShadow: "0 0 60px rgba(34,197,94,0.8)",
+            }}
+          >
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1.2 }}
+              transition={{ delay: 0.3 }}
+              style={{
+                fontSize: "60px",
+                color: "#fff",
+              }}
+            >
+              ✓
+            </motion.span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 
 export default Contact;
-
-
-
