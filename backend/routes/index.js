@@ -1,161 +1,7 @@
-// var express = require('express');
-// var router = express.Router();
-// const bcrypt = require("bcryptjs");
-// const userModel = require("../models/User");
 
-// const jwt = require("jsonwebtoken");
-// const Path = require("path")
-// var router = express.Router();
-
-// router.get("/register", (req, res) =>  {
-//   res.send("Register route working ");
-// });
-
-// router.post("/register", async (req, res) => {  
-//   try {
-//     const { fullName,email,password } = req.body;
-
-    
-//     const existingUser = await userModel.findOne({ email: email.toLowerCase() });
-//     if (existingUser) {
-//       return res.status(400).json({ message: "User already exists" });
-//     }
-
-   
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(password, salt);
-
-    
-//     const newUser = await userModel.create({
-//       fullName,
-      
-//       email: email.toLowerCase(),
-      
-//       password: hashedPassword,
-      
-//     });
-
-//     console.log("User registered:", newUser);
-//     res.status(201).json({ message: "User registered successfully", user: newUser });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// });
-
-
-
-
-
-
-// router.post("/login",async(req,res) => {
-//   const{email,password} = req.body;
-//   console.log(req.body);
-  
-//   if(!email || !password) {
-//    return res.status(401).json({error:"fill the all data "})
-//   };
-//   try {
-//     const userlogin = await userModel.findOne({email:email});
-//     if(!userlogin){
-//       res.status(401).json({message:"user not found"})
-//     }
-//     if(userlogin) {
-//       const isMatch = await bcrypt.compare(password,userlogin.password);
-//       console.log(isMatch);
-//       if(!isMatch) {
-//         res.status(401).json({error:"something went wrong"})
-
-//       } else {
-//         const token = jwt.sign({email:userlogin.email,id:userlogin._id,username:userlogin.username}, "Mishthi",{expiresIn:"2h"});
-//         res.status(201).json({message:"login success",token:token})
-//       }
-//     }
-//   } catch (error) {
-//     res.status(400).json({error:"invalid details"})
-//   }
-//  })
-
-
-// backend/routes/index.js
-// const express = require("express");
-// const router = express.Router();
-// const User = require("../models/User");
-// const bcrypt = require("bcryptjs");
-
-// // REGISTER
-// // router.post("/register", async (req, res) => {
-// //   try {
-// //     const { fullName, username, email, password } = req.body;
-
-// //     const existingUser = await User.findOne({ email });
-// //     if (existingUser) return res.status(400).json({ message: "User already exists" });
-
-// //     const hashedPassword = await bcrypt.hash(password, 10);
-// //     const user = new User({ fullName, username, email, password: hashedPassword });
-
-// //     await user.save();
-// //     res.status(201).json({ message: "User registered successfully" });
-// //   } catch (err) {
-// //     res.status(500).json({ message: err.message });
-// //   }
-// // });
-
-// router.post("/register", async (req, res) => {
-//   try {
-//     const { fullName, email, password } = req.body;
-//     const newUser = new User({ fullName, email, password });
-//     await newUser.save();
-//     res.status(201).json({ message: "User registered successfully!" });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// });
-
-
-// // LOGIN
-// router.post("/login", async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     const user = await User.findOne({ email });
-//     if (!user) return res.status(404).json({ message: "User not found" });
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
-
-//     res.json({ message: "Login successful", user });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
-
-// module.exports = router;
-
-
-// var express = require("express");
-// var router = express.Router();
-// const User = require("../models/user.js");
-// const bcrypt = require("bcryptjs");
-// const Food = require("../models/food.js");
-// const Request = require("../models/request.js");
-// const jwt = require("jsonwebtoken");
-// const auth = require("../middleware/auth.js")
-
-
-// const router = express.Router();
 
 import express, { response } from "express";
 const router = express.Router();
-
-// import User from "../models/user.js";
-// import Food from "../models/food.js";
-// import Request from "../models/request.js";
-// import bcrypt from "bcryptjs";
-// import jwt from "jsonwebtoken";
-// import authenticateToken from "../middleware/auth.js";
-// import FoodRequest from "../models/foodrequest.js";
 import User from "../models/User.js";
 import Food from "../models/food.js";
 import Request from "../models/request.js";
@@ -163,7 +9,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import authenticateToken from "../middleware/auth.js";
 import FoodRequest from "../models/foodrequest.js";
-
 
 router.get("/receiver/data", authenticateToken, (req, res) => {
   if (req.user.role !== "receiver") {
@@ -178,34 +23,6 @@ router.get("/donor/data", authenticateToken, (req, res) => {
   res.json({ message: "Donor data loaded" });
 });
 
-
-// 🟢 Register route
-// router.post("/register", async (req, res) => {
-//   try {
-//     const { fullName, email, password ,role} = req.body;
-//     console.log(req.body);
-    
-    
-
-//     if (!fullName || !email || !password,!role) {
-//       return res.status(400).json({ message: "All fields are required" });
-//     }
-
-//     const existingUser = await User.findOne({ email });
-//     if (existingUser) {
-//       return res.status(400).json({ message: "Email already exists" });
-//     }
-
-//     const newUser = new User({ fullName, email, password });
-//     await newUser.save();
-
-//     res.status(201).json({ message: "User registered successfully" });
-//   } catch (error) {
-//     console.error("❌ Registration Error:", error.message);
-//     res.status(500).json({ message: "Server error during registration" });
-//   }
-// });
-// POST /register
 router.post("/register", async (req, res) => {
   try {
     const { fullName, email, password, role } = req.body;
@@ -237,34 +54,6 @@ router.post("/register", async (req, res) => {
 
 
 
-// router.post("/login", async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-
-//     const user = await User.findOne({ email });
-//     if (!user) return res.status(400).json({ message: "User not found" });
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch)
-//       return res.status(400).json({ message: "Invalid email or password" });
-
-//     // ⬇⬇ Generate JWT Token here
-//     const token = jwt.sign(
-//       { id: user._id, email: user.email },
-//       "MISHTHI",
-//       { expiresIn: "7d" }
-//     );
-
-//     res.json({
-//       message: "Login successful",
-//       token,
-//       user: { id: user._id, email: user.email },
-//     });
-
-//   } catch (err) {
-//     res.status(500).json({ message: "Server error", error: err.message });
-//   }
-// });
 
 router.post("/login", async (req, res) => {
   try {
@@ -299,12 +88,6 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
-
-
-
-
-
-
 router.post("/add-food", async (req, res) => {
   try {
     const { foodName, quantity, location, contact } = req.body;
@@ -407,18 +190,6 @@ router.post("/request-food", authenticateToken, async (req, res) => {
 });
 
 
-
-
-
-
-// router.get("/my-requests", authenticateToken, async (req, res) => {
-//   try {
-//     const requests = await FoodRequest.find({ receiverId: req.user.id });
-//     res.json({ requests });
-//   } catch (err) {
-//     res.status(500).json({ message: "Server error", error: err.message });
-//   }
-// });
 router.get("/my-requests", authenticateToken, async (req, res) => {
   try {
     const requests = await FoodRequest.find({ requesterId: req.user.id })
@@ -497,5 +268,5 @@ router.put("/requests/update-status/:id",authenticateToken,  async (req, res) =>
     res.status(500).json({ error: err.message });
   }
 });
-// module.exports = router;
+
 export default router;

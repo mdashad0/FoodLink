@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const app = require("../app");
-const http = require("http");
-const dotenv = require("dotenv");
+import http from "http";
+import dotenv from "dotenv";
+import app from "../app.js"; // ES module requires .js extension
 
 dotenv.config();
 
@@ -21,4 +21,3 @@ function normalizePort(val) {
   if (port >= 0) return port;
   return false;
 }
-

@@ -4,7 +4,7 @@ import { FaPlus, FaClipboardList, FaHandshake } from "react-icons/fa";
 
 const DonorDashboard = () => {
   return (
-    <div className="p-6 bg-white min-h-screen">
+    <div className="p-6 bg-white w-screen h-screen">
       {/* Header */}
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
         👋 Welcome, Donor!
