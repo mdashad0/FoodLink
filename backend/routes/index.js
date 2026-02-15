@@ -10,25 +10,71 @@ import jwt from "jsonwebtoken";
 import authenticateToken from "../middleware/auth.js";
 import FoodRequest from "../models/foodrequest.js";
 
-router.get("/receiver/data", authenticateToken, (req, res) => {
-  if (req.user.role !== "receiver") {
-    return res.status(403).json({ message: "Access denied" });
+router.get("/receiver/data", authenticateToken, async (req, res) => {
+  try {
+    if (req.user.role !== "receiver") {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    const receiverId = req.user.id;
+
+    const availableFood = await Food.countDocuments({ status: "available" });
+
+    const myRequests = await Request.countDocuments({
+      receiver: receiverId
+    });
+
+    const approvedRequests = await Request.countDocuments({
+      receiver: receiverId,
+      status: "approved"
+    });
+
+    res.json({
+      availableFood,
+      myRequests,
+      approvedRequests
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
-  res.json({ message: "Receiver data loaded" });
 });
-router.get("/donor/data", authenticateToken, (req, res) => {
-  if (req.user.role !== "donor") {
-    return res.status(403).json({ message: "Access denied" });
+
+router.get("/donor/data", authenticateToken, async (req, res) => {
+  try {
+    if (req.user.role !== "donor") {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    const donorId = req.user.id;
+
+    
+    
+
+    const totalListings = await Food.countDocuments({ donor: donorId });
+    const requestsReceived = await Request.countDocuments({ donor: donorId });
+    const successfulDonations = await Food.countDocuments({
+      donor: donorId,
+      status: "donated",
+    });
+
+    res.json({
+      totalListings,
+      requestsReceived,
+      successfulDonations,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
-  res.json({ message: "Donor data loaded" });
 });
 
 router.post("/register", async (req, res) => {
   try {
     const { fullName, email, password, role } = req.body;
 
-    if (!role) {
-      return res.status(400).json({ message: "Role is required" });
+    if (!fullName || !email || !password || !role) {
+      return res.status(400).json({ message: "All fields are required" });
     }
 
     const existing = await User.findOne({ email });
@@ -36,21 +82,23 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    const user = new User({
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await User.create({
       fullName,
       email,
-      password,
+      password: hashedPassword,
       role,
     });
 
-    await user.save();
-    res.json({ message: "User registered successfully", user });
+    res.status(201).json({ message: "User registered successfully" });
 
   } catch (err) {
-    console.error("Registration error:", err.message);
-    res.status(500).json({ error: err.message });
+    console.error("Registration error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 });
+
 
 
 

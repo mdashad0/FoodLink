@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaPlus, FaClipboardList, FaHandshake } from "react-icons/fa";
+import axios from "axios";
 
 const DonorDashboard = () => {
+  const [stats, setStats] = useState({
+    totalListings: 0,
+    requestsReceived: 0,
+    successfulDonations: 0,
+  });
+
+  useEffect(() => {
+    const fetchDonorData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const res = await axios.get(
+  "https://foodlink-0jeg.onrender.com/donor/data",
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }
+);
+
+        setStats(res.data);
+      } catch (error) {
+        console.error("Error fetching donor data:", error);
+      }
+    };
+
+    fetchDonorData();
+  }, []);
+  
   return (
     <div className="p-6 bg-white w-screen h-screen">
       {/* Header */}
@@ -15,17 +45,17 @@ const DonorDashboard = () => {
 
         <div className="bg-gray-200 p-6 rounded-xl shadow hover:shadow-lg transition">
           <h2 className="text-xl font-semibold text-gray-700">Total Listings</h2>
-          <p className="text-4xl font-bold text-green-400 mt-3">12</p>
+          <p className="text-4xl font-bold text-green-400 mt-3"></p>
         </div>
 
         <div className="bg-gray-200 p-6 rounded-xl shadow hover:shadow-lg transition">
           <h2 className="text-xl font-semibold text-gray-700">Requests Received</h2>
-          <p className="text-4xl font-bold text-blue-600 mt-3">5</p>
+          <p className="text-4xl font-bold text-blue-600 mt-3"></p>
         </div>
 
         <div className="bg-gray-200 p-6 rounded-xl shadow hover:shadow-lg transition">
           <h2 className="text-xl font-semibold text-gray-700">Successful Donations</h2>
-          <p className="text-4xl font-bold text-purple-600 mt-3">8</p>
+          <p className="text-4xl font-bold text-purple-600 mt-3"></p>
         </div>
       </div>
 
