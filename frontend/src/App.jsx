@@ -63,8 +63,7 @@ import ReceiverDashboard from "./pages/ReceiverDashboard";
 
 const App = () => {
   return (
-    
-    <>
+    <Router>   
       <Navbar />
       <div style={{ paddingTop: "80px" }}>
         <Routes>
@@ -74,23 +73,18 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/dashboard" element={<Dashboard/>} /> */}
           <Route path="/donor/requests" element={<RequestsReceived />} />
           <Route path="/receiver/browse-food" element={<BrowseFood />} />
-          <Route path="/donor/add-food" element={<AddFood/>} />
-          <Route path="/components/foodcard" element={<FoodCard/>} />
-          <Route path="/receiver/my-requests" element={<MyRequests/>} />
-          
-          <Route path="/donor/my-listings" element={<MyListing/>} />
-          <Route path="/dashboard" element={ <Protected> <Dashboard /> </Protected> } />
-          <Route path="/donor-dashboard" element = {<Protected> <DonorDashboard/></Protected>} />
-          <Route path ="/receiver-dashboard" element = {<Protected><ReceiverDashboard/></Protected>} />
-          
-
+          <Route path="/donor/add-food" element={<AddFood />} />
+          <Route path="/components/foodcard" element={<FoodCard />} />
+          <Route path="/receiver/my-requests" element={<MyRequests />} />
+          <Route path="/donor/my-listings" element={<MyListing />} />
+          <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />
+          <Route path="/donor-dashboard" element={<Protected><DonorDashboard /></Protected>} />
+          <Route path="/receiver-dashboard" element={<Protected><ReceiverDashboard /></Protected>} />
         </Routes>
       </div>
-    
-    </>
+    </Router>  
   );
 };
 
