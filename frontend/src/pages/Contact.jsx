@@ -70,6 +70,25 @@ const Contact = () => {
     { icon: <FaInstagram size={20} />, url: "#", color: "#e4405f" },
   ];
 
+  const faqItems = [
+    {
+      question: "How do I donate food through FoodLink?",
+      answer: "Simply create a donor account, list your surplus food with photos and pickup details, and our platform will connect you with nearby receivers."
+    },
+    {
+      question: "Is FoodLink free to use?",
+      answer: "Yes! FoodLink is completely free for both food donors and receivers. Our mission is to reduce food waste and help communities."
+    },
+    {
+      question: "How do you ensure food safety?",
+      answer: "We have strict food safety guidelines, verification processes, and encourage users to follow local health department standards."
+    },
+    {
+      question: "Can individuals donate, or just restaurants?",
+      answer: "Both! Restaurants, events, and individuals can all donate surplus food through our platform to help reduce waste."
+    }
+  ];
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -301,7 +320,6 @@ const Contact = () => {
       transition: "all 0.3s ease",
       background: "#fff",
       boxSizing: "border-box",
-      color: "black",
     }),
 
     select: {
@@ -328,7 +346,6 @@ const Contact = () => {
       transition: "all 0.3s ease",
       background: "#fff",
       boxSizing: "border-box",
-      color: "black",
     }),
 
     submitButton: {
@@ -376,6 +393,35 @@ const Contact = () => {
       textDecoration: "none",
       transition: "all 0.3s ease",
     }),
+
+    // FAQ Styles
+    faqSection: {
+      maxWidth: "800px",
+      margin: "0 auto",
+    },
+
+    faqItem: {
+      background: "rgba(255,255,255,0.95)",
+      marginBottom: "20px",
+      borderRadius: "15px",
+      overflow: "hidden",
+      boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
+    },
+
+    faqQuestion: {
+      padding: "25px",
+      fontSize: "1.1rem",
+      fontWeight: "600",
+      color: "#2c3e50",
+      cursor: "pointer",
+      borderBottom: "1px solid #e0e0e0",
+    },
+
+    faqAnswer: {
+      padding: "25px",
+      color: "#5a6c7d",
+      lineHeight: "1.6",
+    },
 
     // Success Animation
     successOverlay: {
@@ -581,6 +627,23 @@ const Contact = () => {
           </div>
         );
         
+      case 'faq':
+        return (
+          <div style={styles.faqSection}>
+            {faqItems.map((item, index) => (
+              <div key={index} style={styles.faqItem}>
+                <div style={styles.faqQuestion}>
+                  <FaQuestionCircle style={{ marginRight: "10px", color: "#667eea" }} />
+                  {item.question}
+                </div>
+                <div style={styles.faqAnswer}>
+                  {item.answer}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+        
       default:
         return null;
     }
@@ -625,6 +688,25 @@ const Contact = () => {
             >
               <FaEnvelope />
               Contact Us
+            </button>
+            <button
+              style={styles.tabButton(activeTab === 'faq')}
+              onClick={() => setActiveTab('faq')}
+              onMouseEnter={(e) => {
+                if (activeTab !== 'faq') {
+                  e.target.style.background = "rgba(255,255,255,0.1)";
+                  e.target.style.transform = "scale(1.05)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeTab !== 'faq') {
+                  e.target.style.background = "transparent";
+                  e.target.style.transform = "scale(1)";
+                }
+              }}
+            >
+              <FaQuestionCircle />
+              FAQ
             </button>
           </div>
 
