@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const About = () => {
   const [showForm, setShowForm] = useState(false);
@@ -55,7 +56,7 @@ const About = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Welcome " + formData.name + " 🎉");
+    toast.success("Welcome " + formData.name + " 🎉");
     setShowForm(false);
     setFormData({ name: "", email: "", role: "" });
   };

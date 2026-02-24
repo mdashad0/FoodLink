@@ -42,6 +42,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/Herosection";
 import Login from "./pages/Login";
@@ -65,6 +66,7 @@ import TermsOfService from "./pages/TermsOfService";
 const App = () => {
   return (
     <Router>   
+      <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
       <Navbar />
       <div style={{ paddingTop: "80px" }}>
         <Routes>

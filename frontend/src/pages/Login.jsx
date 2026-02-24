@@ -300,13 +300,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const styles = {
@@ -397,8 +397,8 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
     setLoading(true);
+    const loadingToast = toast.loading("Logging in...");
     try {
       const response = await axios.post("https://foodlink-0jeg.onrender.com/login", {
         email,
@@ -406,31 +406,23 @@ const Login = () => {
       });
       console.log("Login Response:", response.data);
 
-
-      
       localStorage.setItem("token", response.data.token);
-      
-      // localStorage.setItem("userId", response.data.user.id);
-      // navigate("/dashboard"); 
       localStorage.setItem("role", response.data.user.role);
-      if (response.data.user.role === "donor") {
-  navigate("/donor-dashboard");
-} else if (response.data.user.role === "receiver") {
-  navigate("/receiver-dashboard");
-}
-// if (user.role === "donor") {
-//       navigate("/donor-dashboard");
-//     } else {
-//       navigate("/receiver-dashboard");
-//     }
 
+      toast.success("Login successful! Welcome back 🎉", { id: loadingToast });
+
+      if (response.data.user.role === "donor") {
+        navigate("/donor-dashboard");
+      } else if (response.data.user.role === "receiver") {
+        navigate("/receiver-dashboard");
+      }
     } catch (err) {
       console.log(err);
-      if (err.response && err.response.data) {
-        setError(err.response.data.message || "Login failed");
-      } else {
-        setError("Server not responding");
-      }
+      const message =
+        err.response && err.response.data
+          ? err.response.data.message || "Login failed"
+          : "Server not responding";
+      toast.error(message, { id: loadingToast });
     } finally {
       setLoading(false);
     }
@@ -462,7 +454,6 @@ const Login = () => {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
-        {error && <p style={styles.error}>{error}</p>}
         <p style={styles.linkText}>
           Don’t have an account?{" "}
           <Link to="/register" style={styles.registerLink}>

@@ -506,6 +506,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link,useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 const Register = () => {
@@ -529,17 +530,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const loadingToast = toast.loading("Creating your account...");
     try {
       const res = await axios.post("https://foodlink-0jeg.onrender.com/register", formData);
-      alert(res.data.message || "User registered successfully!");
+      toast.success(res.data.message || "Account created successfully! 🎉", { id: loadingToast });
       setFormData({ fullName: "", email: "", password: "", role: "" });
-
       navigate("/login");
-       
-
     } catch (err) {
       console.error(err);
-      alert("❌ Registration failed. Please check your backend connection.");
+      toast.error("Registration failed. Please check your connection.", { id: loadingToast });
     }
   };
 
