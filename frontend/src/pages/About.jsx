@@ -65,10 +65,10 @@ const About = () => {
     aboutContainer: {
       width: "100vw",
       minHeight: "100vh",
-      padding: "80px 20px 40px",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      padding: "60px 0 40px",
+      background: "linear-gradient(120deg, #f8fafc 0%, #e0eafc 100%)",
       boxSizing: "border-box",
-      fontFamily: "'Poppins', sans-serif",
+      fontFamily: "'Poppins', 'Segoe UI', Arial, sans-serif",
       position: "relative",
       overflow: "hidden",
     },
@@ -85,96 +85,97 @@ const About = () => {
 
     shape1: {
       position: "absolute",
-      top: "10%",
-      left: "10%",
-      width: "300px",
-      height: "300px",
+      top: "8%",
+      left: "8%",
+      width: "320px",
+      height: "320px",
       borderRadius: "50%",
-      background: "linear-gradient(45deg, #ff6b6b, #feca57)",
-      opacity: 0.1,
-      animation: "float 6s ease-in-out infinite",
+      background: "linear-gradient(120deg, #cfd9df 0%, #e2ebf0 100%)",
+      opacity: 0.12,
+      animation: "float 7s ease-in-out infinite",
     },
 
     shape2: {
       position: "absolute",
-      top: "60%",
-      right: "15%",
-      width: "200px",
-      height: "200px",
-      borderRadius: "30px",
-      background: "linear-gradient(45deg, #48cae4, #023e8a)",
-      opacity: 0.1,
-      animation: "float 4s ease-in-out infinite reverse",
-      transform: "rotate(45deg)",
+      top: "65%",
+      right: "10%",
+      width: "220px",
+      height: "220px",
+      borderRadius: "40px",
+      background: "linear-gradient(120deg, #f8fafc 0%, #e0eafc 100%)",
+      opacity: 0.10,
+      animation: "float 5s ease-in-out infinite reverse",
+      transform: "rotate(35deg)",
     },
 
     contentWrapper: {
       position: "relative",
       zIndex: 1,
-      maxWidth: "1200px",
+      maxWidth: "1100px",
       margin: "0 auto",
+      padding: "0 16px",
       opacity: isVisible ? 1 : 0,
       transform: isVisible ? "translateY(0)" : "translateY(50px)",
-      transition: "all 0.8s ease",
+      transition: "all 0.8s cubic-bezier(0.4,0,0.2,1)",
     },
 
     hero: {
       textAlign: "center",
-      marginBottom: "80px",
+      marginBottom: "60px",
     },
 
     aboutCard: {
       width: "100%",
-      padding: "60px 40px",
-      borderRadius: "30px",
-      background: "rgba(255, 255, 255, 0.95)",
-      backdropFilter: "blur(20px)",
-      WebkitBackdropFilter: "blur(20px)",
-      boxShadow: "0 25px 80px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.6)",
-      color: "#2c3e50",
+      padding: "48px 28px 40px",
+      borderRadius: "28px",
+      background: "rgba(255,255,255,0.98)",
+      backdropFilter: "blur(28px)",
+      WebkitBackdropFilter: "blur(28px)",
+      boxShadow: "0 12px 48px rgba(180, 200, 255, 0.13), 0 1.5px 0 rgba(255,255,255,0.7)",
+      color: "#25324b",
       textAlign: "center",
-      transition: "all 0.4s ease",
-      border: "1px solid rgba(255,255,255,0.2)",
+      transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+      border: "1.5px solid rgba(200,220,255,0.13)",
     },
 
     heroTitle: {
-      fontSize: "4rem",
-      fontWeight: "900",
-      marginBottom: "20px",
-      background: "linear-gradient(135deg, #667eea, #764ba2, #f093fb)",
+      fontSize: "3.2rem",
+      fontWeight: 900,
+      marginBottom: "18px",
+      background: "linear-gradient(120deg, #667eea, #89f7fe, #f093fb)",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
-      textShadow: "0 4px 20px rgba(0,0,0,0.3)",
-      letterSpacing: "-0.02em",
+      textShadow: "0 2px 12px rgba(0,0,0,0.10)",
+      letterSpacing: "-0.01em",
     },
 
     heroSubtitle: {
-      fontSize: "1.4rem",
-      fontWeight: "400",
-      color: "rgba(255,255,255,0.9)",
-      marginBottom: "40px",
-      lineHeight: "1.6",
-      maxWidth: "600px",
-      margin: "0 auto 40px",
+      fontSize: "1.18rem",
+      fontWeight: 400,
+      color: "#4a5a6a",
+      marginBottom: "32px",
+      lineHeight: 1.7,
+      maxWidth: "540px",
+      margin: "0 auto 32px",
     },
 
     heading: {
-      fontSize: "2.8rem",
-      fontWeight: "700",
-      marginBottom: "30px",
-      background: "linear-gradient(135deg, #667eea, #764ba2)",
+      fontSize: "2.2rem",
+      fontWeight: 700,
+      marginBottom: "22px",
+      background: "linear-gradient(120deg, #667eea, #89f7fe)",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent",
       position: "relative",
     },
 
     paragraph: {
-      fontSize: "1.2rem",
-      lineHeight: "1.8",
-      marginBottom: "40px",
+      fontSize: "1.08rem",
+      lineHeight: 1.8,
+      marginBottom: "32px",
       color: "#5a6c7d",
-      maxWidth: "800px",
-      margin: "0 auto 40px",
+      maxWidth: "700px",
+      margin: "0 auto 32px",
     },
 
     statsSection: {
@@ -184,15 +185,16 @@ const About = () => {
       marginBottom: "60px",
       padding: "40px",
       borderRadius: "20px",
-      background: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)",
+      background: "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)",
     },
 
     statCard: {
       textAlign: "center",
       padding: "20px",
       borderRadius: "15px",
-      background: "rgba(255,255,255,0.9)",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+      background: "rgba(255,255,255,0.96)",
+      boxShadow: "0 10px 30px rgba(175, 200, 255, 0.10)",
+      transition: "box-shadow 0.3s, transform 0.3s",
     },
 
     statNumber: {
@@ -219,12 +221,12 @@ const About = () => {
     featureCard: {
       padding: "30px",
       borderRadius: "20px",
-      background: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      background: "linear-gradient(135deg, #b7f8db 0%, #f5f7fa 100%)",
       transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       cursor: "pointer",
-      boxShadow: "0 10px 40px rgba(0,0,0,0.1)",
+      boxShadow: "0 10px 40px rgba(175, 200, 255, 0.10)",
       fontWeight: "600",
-      color: "white",
+      color: "#2d3a4a",
       position: "relative",
       overflow: "hidden",
     },
@@ -251,12 +253,12 @@ const About = () => {
       marginTop: "60px",
       padding: "40px",
       borderRadius: "25px",
-      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
       fontWeight: "600",
       fontSize: "1.3rem",
-      boxShadow: "0 20px 60px rgba(102, 126, 234, 0.3)",
+      boxShadow: "0 20px 60px rgba(175, 200, 255, 0.18)",
       transition: "all 0.4s ease",
-      color: "white",
+      color: "#2d3a4a",
       position: "relative",
       overflow: "hidden",
     },
@@ -430,35 +432,28 @@ const About = () => {
             </p>
 
             {/* Statistics Section */}
-            <div style={styles.statsSection}>
-              <div style={styles.statCard}>
+            <div style={styles.statsSection} className="stats-section">
+              <div style={styles.statCard} className="stat-card">
                 <span style={styles.statNumber}>{counters.mealsRedistributed}+</span>
                 <span style={styles.statLabel}>Meals Redistributed</span>
               </div>
-              <div style={styles.statCard}>
+              <div style={styles.statCard} className="stat-card">
                 <span style={styles.statNumber}>{counters.partnersConnected}+</span>
                 <span style={styles.statLabel}>Partners Connected</span>
               </div>
-              <div style={styles.statCard}>
+              <div style={styles.statCard} className="stat-card">
                 <span style={styles.statNumber}>{counters.foodWasteReduced}%</span>
                 <span style={styles.statLabel}>Food Waste Reduced</span>
               </div>
             </div>
 
             {/* Features Grid */}
-            <div style={styles.featureGrid}>
+            <div style={styles.featureGrid} className="feature-grid">
               {features.map((feature, index) => (
                 <div
                   key={index}
                   style={styles.featureCard}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-15px) scale(1.02)";
-                    e.currentTarget.style.boxShadow = "0 25px 60px rgba(0,0,0,0.2)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0) scale(1)";
-                    e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.1)";
-                  }}
+                  className="feature-card"
                 >
                   <span style={styles.featureIcon}>{feature.icon}</span>
                   <div style={styles.featureTitle}>{feature.title}</div>
@@ -470,14 +465,7 @@ const About = () => {
             {/* Impact Box */}
             <div
               style={styles.impactBox}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 30px 80px rgba(102, 126, 234, 0.4)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-                e.currentTarget.style.boxShadow = "0 20px 60px rgba(102, 126, 234, 0.3)";
-              }}
+              className="impact-box"
             >
               <span style={styles.impactIcon}>🌍</span>
               Since our launch, FoodLink has become a cornerstone of community support, redistributing over {counters.mealsRedistributed} meals 
@@ -488,15 +476,8 @@ const About = () => {
             {/* CTA Button */}
             <button
               style={styles.button}
+              className="about-btn"
               onClick={() => setShowForm(true)}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-3px) scale(1.05)";
-                e.currentTarget.style.boxShadow = "0 20px 50px rgba(102, 126, 234, 0.5)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "0 15px 35px rgba(102, 126, 234, 0.4)";
-              }}
             >
               Join Our Mission 🚀
             </button>
@@ -612,7 +593,32 @@ const About = () => {
       <style>
         {`
           input::placeholder {
-            color: rgba(255,255,255,0.85);
+            color: rgba(80,80,80,0.7);
+          }
+
+          .stat-card:hover {
+            box-shadow: 0 18px 40px rgba(120, 180, 255, 0.18) !important;
+            transform: translateY(-8px) scale(1.04) !important;
+            transition: box-shadow 0.3s, transform 0.3s;
+          }
+          .feature-card:hover {
+            background: linear-gradient(135deg, #f5f7fa 0%, #b7f8db 100%) !important;
+            box-shadow: 0 25px 60px rgba(120, 180, 255, 0.18) !important;
+            color: #222 !important;
+            transform: translateY(-10px) scale(1.04) !important;
+            transition: box-shadow 0.3s, transform 0.3s, background 0.3s, color 0.3s;
+          }
+          .impact-box:hover {
+            box-shadow: 0 30px 80px rgba(120, 180, 255, 0.22) !important;
+            transform: scale(1.03) !important;
+            transition: box-shadow 0.3s, transform 0.3s;
+          }
+          .about-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #89f7fe 100%) !important;
+            color: #222 !important;
+            transform: translateY(-4px) scale(1.07) !important;
+            box-shadow: 0 25px 60px rgba(120, 180, 255, 0.22) !important;
+            transition: box-shadow 0.3s, transform 0.3s, background 0.3s, color 0.3s;
           }
 
           @keyframes popup {
@@ -650,23 +656,19 @@ const About = () => {
             h1 {
               font-size: 2.5rem !important;
             }
-            
             .hero-subtitle {
               font-size: 1.1rem !important;
               padding: 0 10px;
             }
-            
             .stats-section {
               grid-template-columns: 1fr !important;
               gap: 20px !important;
               padding: 20px !important;
             }
-            
             .feature-grid {
               grid-template-columns: 1fr !important;
               gap: 20px !important;
             }
-            
             .about-card {
               padding: 30px 20px !important;
               margin: 0 10px;
