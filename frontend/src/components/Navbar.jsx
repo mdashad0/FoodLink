@@ -17,20 +17,25 @@ const Navbar = () => {
     <>
       <div style={styles.wrapper}>
         <div style={styles.outerPill}>
-          <div style={styles.innerPill}>
-            {navItems.map((item) => (
-              <NavLink
-                key={item.name}
-                to={item.path}
-                end={item.path === "/"}
-                style={({ isActive }) => ({
-                  ...styles.navItem,
-                  ...(isActive ? styles.activeItem : {}),
-                })}
-              >
-                {item.name}
-              </NavLink>
-            ))}
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <span style={{ fontWeight: 700, fontSize: 22, color: "#22c55e", fontFamily: "Poppins, sans-serif", letterSpacing: 1 }}>
+              <span role="img" aria-label="logo"></span> Food Link
+            </span>
+            <div style={styles.innerPill}>
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  end={item.path === "/"} // Changed ')' to '}'
+                  style={({ isActive }) => ({
+                    ...styles.navItem,
+                    ...(isActive ? styles.activeItem : {}),
+                  })}
+                >
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
           </div>
         </div>
       </div>
