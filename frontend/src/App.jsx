@@ -44,6 +44,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import HeroSection from "./components/Herosection";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -61,7 +62,6 @@ import Protected from "./components/Protected";
 import DonorDashboard from "./pages/DonorDashboard";
 import ReceiverDashboard from "./pages/ReceiverDashboard";
 import TermsOfService from "./pages/TermsOfService";
-import Footer from "./components/Footer";
 
 
 const App = () => {
